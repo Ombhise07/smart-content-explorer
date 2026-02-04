@@ -1,7 +1,7 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchArticles } from "../features/articles/articlesSlice";
+import ArticleCard from "../components/ArticleCard";
 
 function Home() {
 
@@ -26,16 +26,7 @@ function Home() {
             <h1>Articles</h1>
             <ul>
                  {articles.map((article) => (
-                <li>
-                    {console.log(article.id)}
-                    {console.log(article.title)}
-                    {console.log(article.user.name)}
-                    <div key={article.id}>
-                        <h2>{article.title}</h2>
-                        <p>{article.description}</p>
-                        <p>{article.user.name}</p>
-                    </div>
-                </li>
+                    <ArticleCard key={article.id} article={article}/>
             ))}
             </ul>
         </div>
