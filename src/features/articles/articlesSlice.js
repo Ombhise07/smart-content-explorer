@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 
+// create initialState
 const initialState = {
     articles: [],
     loading: false,
     error: null,
+    searchInput: "",
 };
 
 // using async thunk for fetching articles
@@ -20,10 +22,12 @@ export const articlesSlice = createSlice({
     name: 'articles',
     initialState,
     reducers: { // for search logic
-
+        setSearchInput: (state,action) => {
+            state.searchInput = action.payload;
+        },
     },
 
-    // extraReduces to handle the external function
+// extraReduces to handle the external function
     extraReducers: (builder) => {
         builder
         .addCase(fetchArticles.pending, (state) => {
@@ -41,6 +45,6 @@ export const articlesSlice = createSlice({
     },
 });
 
-export const {} = articlesSlice.actions
+export const {setSearchInput} = articlesSlice.actions
 
 export default articlesSlice.reducer;
