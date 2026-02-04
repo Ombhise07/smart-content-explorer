@@ -6,6 +6,7 @@ const initialState = {
     loading: false,
     error: null,
     searchInput: "",
+    selectedTag: "",
 };
 
 // using async thunk for fetching articles
@@ -21,9 +22,13 @@ export const fetchArticles = createAsyncThunk(
 export const articlesSlice = createSlice({
     name: 'articles',
     initialState,
-    reducers: { // for search logic
+    reducers: { // for search and filter logic
         setSearchInput: (state,action) => {
             state.searchInput = action.payload;
+        },
+
+        setSelectedTag: (state,action) => {
+            state.selectedTag = action.payload;
         },
     },
 
@@ -45,6 +50,6 @@ export const articlesSlice = createSlice({
     },
 });
 
-export const {setSearchInput} = articlesSlice.actions
+export const {setSearchInput, setSelectedTag} = articlesSlice.actions
 
 export default articlesSlice.reducer;

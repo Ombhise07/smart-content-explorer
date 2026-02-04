@@ -3,16 +3,25 @@ import { useEffect } from "react";
 import { fetchArticles } from "../features/articles/articlesSlice";
 import ArticleCard from "../components/ArticleCard";
 import SearchBar from "../components/SearchBar";
+import TagFilter from "../components/TagFilter";
 
 function Home() {
 
     const dispatch = useDispatch();
-    const {articles, loading, error, searchInput} = useSelector((state) => state.articles);
+    const {articles, loading, error, searchInput, selectedTag} = useSelector((state) => state.articles);
 
     //Getting the search article
-    const filterArticles = articles.filter((article) => 
-        article.title.toLowerCase().includes(searchInput.toLowerCase())
-    );
+    const filterArticles = articles.filter((article) => {
+         const matchedSearch = article.title
+            .toLowerCase().
+            includes(searchInput.toLowerCase());  // logic for  searching
+
+        const matchedTag = selectedTag
+            ? article.tag_list.includes(selectedTag)
+            : true;
+
+            return matchedSearch && matchedTag
+    });
 
     useEffect(() => {
         dispatch(fetchArticles());
@@ -29,6 +38,8 @@ function Home() {
     return(
         <>
         <SearchBar />
+        <TagFilter />
+        
         <div>
             <h1>Articles</h1>
             <ul>
