@@ -73,6 +73,6 @@ export const articlesSlice = createSlice({
     },
 });
 
-export const {setSearchInput, setSelectedTag} = articlesSlice.actions
+export const {setSearchInput, setSelectedTag} = articlesSlice.actions;
 
 export default articlesSlice.reducer;

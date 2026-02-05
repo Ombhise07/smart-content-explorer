@@ -1,5 +1,6 @@
 import './App.css'
 import ArticleDetails from './pages/ArticleDetails'
+import Favorites from './pages/Favorites'
 import Home from './pages/Home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}/>
         <Route path="/article/:id" element={<ArticleDetails />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </BrowserRouter>
   )

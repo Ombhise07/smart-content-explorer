@@ -4,6 +4,7 @@ import { fetchArticles } from "../features/articles/articlesSlice";
 import ArticleCard from "../components/ArticleCard";
 import SearchBar from "../components/SearchBar";
 import TagFilter from "../components/TagFilter";
+import { Link } from "react-router-dom";
 
 function Home() {
 
@@ -33,6 +34,7 @@ function Home() {
         <>
         <SearchBar />
         <TagFilter />
+        <Link to="/favorites">❤️ View Favorites</Link>
 
         <div>
             <h1>Articles</h1>
