@@ -8,8 +8,7 @@ import TagFilter from "../components/TagFilter";
 function Home() {
 
     const dispatch = useDispatch();
-    const {articles, loading, error, searchInput, selectedTag} = useSelector((state) => state.articles);
-
+    const {articles = [], loading, error, searchInput, selectedTag} = useSelector((state) => state.articles);
 
     //Getting the search article
     const filterArticles = articles.filter((article) => 
