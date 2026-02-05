@@ -10,22 +10,17 @@ function Home() {
     const dispatch = useDispatch();
     const {articles, loading, error, searchInput, selectedTag} = useSelector((state) => state.articles);
 
+
     //Getting the search article
-    const filterArticles = articles.filter((article) => {
-         const matchedSearch = article.title
+    const filterArticles = articles.filter((article) => 
+            article.title
             .toLowerCase().
-            includes(searchInput.toLowerCase());  // logic for  searching
-
-        const matchedTag = selectedTag
-            ? article.tag_list.includes(selectedTag)
-            : true;
-
-            return matchedSearch && matchedTag
-    });
+            includes(searchInput.toLowerCase())  // logic for  searching
+    );
 
     useEffect(() => {
         dispatch(fetchArticles());
-    }, [dispatch]);
+    }, [dispatch, selectedTag]);
 
     if(loading) {
         return <h2>Loading...</h2>
@@ -39,7 +34,7 @@ function Home() {
         <>
         <SearchBar />
         <TagFilter />
-        
+
         <div>
             <h1>Articles</h1>
             <ul>

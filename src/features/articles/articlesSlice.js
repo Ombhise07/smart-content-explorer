@@ -18,6 +18,17 @@ export const fetchArticles = createAsyncThunk(
     }
 );
 
+// For tag filtering 
+export const fetchTagedArticles = createAsyncThunk(
+    "articles/fetchTagedArticles",
+    async (tag) => {
+        const url = `https://dev.to/api/articles?tag=${tag}`;
+
+        const response = await fetch(url);
+        return await response.json();
+    }
+);
+
 // creating the slice
 export const articlesSlice = createSlice({
     name: 'articles',
@@ -44,6 +55,18 @@ export const articlesSlice = createSlice({
             state.articles = action.payload;
         })
         .addCase(fetchArticles.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message;
+        })
+        .addCase(fetchTagedArticles.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(fetchTagedArticles.fulfilled, (state, action) => {
+            state.loading = false;
+            state.articles = action.payload;
+        })
+        .addCase(fetchTagedArticles.rejected, (state, action) => {
             state.loading = false;
             state.error = action.error.message;
         });

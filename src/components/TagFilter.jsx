@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import { setSelectedTag } from "../features/articles/articlesSlice";
+import { fetchTagedArticles, setSelectedTag } from "../features/articles/articlesSlice";
 
 const tags = ["react", "javascript", "webdev", "frontend"];
 
@@ -12,13 +12,17 @@ function TagFilter() {
             {tags.map((tag) => (
                 <button 
                 key={tag}
-                onClick={() => {dispatch(setSelectedTag(tag))}}
+                onClick={() => {dispatch(fetchTagedArticles(tag))}}
                 style={{marginRight:"8px"}}>
                     {tag}
                 </button>
             ))}
 
-            <button onClick={() => dispatch(setSelectedTag(""))}>
+            <button onClick={() => {
+                dispatch(setSelectedTag(""));
+                dispatch(fetchTagedArticles(""));
+            }
+            }>
                 Clear
             </button>
         </div>
