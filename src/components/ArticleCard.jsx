@@ -42,19 +42,35 @@ function ArticleCard({article}) {
     // Displays article title, description, author name,
     // and favorite toggle button.
     return (
-        <div style={{border:"1px solid #ddd", padding: "16px", marginBottom: "12px"}}>
-            <h3>
-                <Link to={`/article/${article.id}`}>
+        <div className="bg-white border border-gray-200 rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-300">
+            
+            <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+                <Link 
+                    to={`/article/${article.id}`}
+                    className="hover:text-indigo-600 transition-colors"
+                >
                     {article.title}
                 </Link>
             </h3>
-            <p>{article.description}</p>
 
-            <p>
-                <strong>Author:</strong>{article.user.name}
+            <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                {article.description}
             </p>
 
-            <button onClick={handleFavoriteClick}>
+            <p className="text-sm text-gray-500 mb-4">
+                <strong className="text-gray-700">Author:</strong>{" "}
+                {article.user.name}
+            </p>
+
+            <button 
+                onClick={handleFavoriteClick}
+                className={`w-full py-2 rounded-full font-medium transition-colors
+                    ${isFavorites 
+                        ? "bg-rose-50 text-rose-600 hover:bg-rose-100" 
+                        : "bg-indigo-50 text-indigo-600 hover:bg-indigo-100"
+                    }
+                `}
+            >
                 {isFavorites ? "Remove from Favorties": "Add to Favorites"}
             </button>
         </div>
@@ -62,4 +78,4 @@ function ArticleCard({article}) {
 }
 
 // Export ArticleCard component
-export default ArticleCard; 
+export default ArticleCard;

@@ -50,38 +50,76 @@ function Home() {
 
     // Display loading page while fetching data
     if(loading) {
-        return <Loader />
+        return (
+            <div className="flex justify-center items-center min-h-[50vh]">
+                <Loader />
+            </div>
+        );
     }
 
     // Display error page if API request fails
     if(error){
-        return < ErrorMessage />
+        return (
+            <div className="flex justify-center items-center min-h-[50vh]">
+                <ErrorMessage />
+            </div>
+        );
     }
 
     // Displays search bar, tag filter, navigation link,
     // and list of filtered articles.
     return(
-        <>
-        {/* Search input component */}
-        <SearchBar />
+        <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-6xl mx-auto">
 
-        {/* Tag filtering component */}
-        <TagFilter />
+                {/* Search input component */}
+                <div className="mb-6">
+                    <SearchBar />
+                </div>
 
-        {/* Link to navigate to favorites page */}
-        <Link to="/favorites">❤️ View Favorites</Link>
+                {/* Tag filtering component */}
+                <div className="mb-6">
+                    <TagFilter />
+                </div>
 
-        <div>
-            <h1>Articles</h1>
+                {/* Link to navigate to favorites page */}
+                <div className="mb-8 text-right">
+                    <Link 
+                        to="/favorites"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-rose-50 text-rose-600 rounded-full font-medium hover:bg-rose-100 transition-colors"
+                    >
+                        ❤️ View Favorites
+                    </Link>
+                </div>
 
-            {/* Render filtered articles */}
-            <ul>
-                 {filterArticles.map((article) => (
-                    <ArticleCard key={article.id} article={article}/>
-            ))}
-            </ul>
+                <div>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-6">
+                        Articles
+                    </h1>
+
+                    {/* Render filtered articles */}
+                    {filterArticles.length > 0 ? (
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {filterArticles.map((article) => (
+                                <li 
+                                    key={article.id}
+                                    className="transform hover:-translate-y-1 transition-transform duration-300"
+                                >
+                                    <ArticleCard article={article}/>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <div className="text-center py-20">
+                            <p className="text-gray-500 text-lg">
+                                No articles found matching "{searchInput}"
+                            </p>
+                        </div>
+                    )}
+                </div>
+
+            </div>
         </div>
-        </>
     )
 }
 

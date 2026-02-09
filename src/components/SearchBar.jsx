@@ -16,10 +16,11 @@ function SearchBar() {
     // Captures user input and dispatches it to Redux
     // store on every change.
     return(
-        <input type="text"
-         placeholder="Search articles"
-         onChange={(e) => {dispatch(setSearchInput(e.target.value))}}
-         style={{padding: "8px", width: "100%", marginBottom: "16px"}}
+        <input
+            type="text"
+            placeholder="Search articles"
+            onChange={(e) => {dispatch(setSearchInput(e.target.value))}}
+            className="w-full px-4 py-2 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
         />
     );
 }

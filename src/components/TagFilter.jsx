@@ -18,26 +18,29 @@ function TagFilter() {
     // Renders buttons for each tag and dispatches
     // corresponding actions on click.
     return(
-        <div style={{marginBottom: "16px"}}>
+        <div className="flex flex-wrap items-center gap-3 mb-4">
             
             {/* Render buttons for each tag */}
             {tags.map((tag) => (
                 <button 
-                key={tag}
+                    key={tag}
 
-                // Fetch articles based on selected tag
-                onClick={() => {dispatch(fetchTagedArticles(tag))}}
-                style={{marginRight:"8px"}}>
+                    // Fetch articles based on selected tag
+                    onClick={() => {dispatch(fetchTagedArticles(tag))}}
+                    className="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 transition-colors"
+                >
                     {tag}
                 </button>
             ))}
 
             {/* Clear filter button */}
-            <button onClick={() => {
-                dispatch(setSelectedTag(""));   // Reset selected tag
-                dispatch(fetchTagedArticles(""));   // Fetch all articles
-            }
-            }>
+            <button 
+                onClick={() => {
+                    dispatch(setSelectedTag(""));   // Reset selected tag
+                    dispatch(fetchTagedArticles(""));   // Fetch all articles
+                }}
+                className="px-4 py-1.5 rounded-full text-sm font-medium bg-rose-50 text-rose-600 hover:bg-rose-100 transition-colors"
+            >
                 Clear
             </button>
         </div>
