@@ -1,5 +1,7 @@
 // Import useDispatch hook to dispatch actions to Redux store
+// Import useSelector to read data from the Redux store
 import {useDispatch} from "react-redux";
+import { useSelector } from "react-redux";
 
 // Import async thunk and reducer action for tag-based filtering
 import { fetchTagedArticles, setSelectedTag } from "../features/articles/articlesSlice";
@@ -15,6 +17,9 @@ function TagFilter() {
     // Initialize dispatch function
     const dispatch = useDispatch();
 
+    // selectedTag to know which tag is selected 
+    const selectedTag = useSelector((state) => state.articles.selectedTag)
+
     // Renders buttons for each tag and dispatches
     // corresponding actions on click.
     return(
@@ -26,8 +31,15 @@ function TagFilter() {
                     key={tag}
 
                     // Fetch articles based on selected tag
-                    onClick={() => {dispatch(fetchTagedArticles(tag))}}
-                    className="px-4 py-1.5 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 transition-colors"
+                    onClick={() => {
+                        dispatch(setSelectedTag(tag))
+                        dispatch(fetchTagedArticles(tag))
+                    }}
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                        selectedTag === tag
+                        ? "bg-indigo-600 text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700"
+                    }`}
                 >
                     {tag}
                 </button>
